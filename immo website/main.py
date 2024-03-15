@@ -6,7 +6,8 @@ from fonctions_dataset import *
 if __name__ == "__main__":
 
     #check si folder cadastres et dataset existe
-    # a faire
+    os.makedirs("dataset")
+    os.makedirs("cadastres")
     
 
     Maj_DB()
