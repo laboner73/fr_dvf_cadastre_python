@@ -6,8 +6,14 @@ from fonctions_dataset import *
 if __name__ == "__main__":
 
     #check si folder cadastres et dataset existe
-    os.makedirs("dataset")
-    os.makedirs("cadastres")
+    try :
+        os.makedirs("dataset")
+    except FileExistsError :
+        pass
+    try :
+        os.makedirs("cadastres")
+    except FileExistsError :
+        pass
     
 
     Maj_DB()
