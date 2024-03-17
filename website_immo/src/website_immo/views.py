@@ -10,10 +10,9 @@ import os
 
 def index(request):
     city_name = request.GET.get('city', "Chozeau")
-
     origin_cd = os.getcwd()
     os.chdir("website_immo")
-    subprocess.run(["python", "FoliumMap.py", city_name])
+    subprocess.run(["python", "FoliumMap.py", city_name, '5', 'Appartement'])
     os.chdir(origin_cd)
     return render(request, r"templates\index.html", context={})
 
@@ -21,4 +20,6 @@ def index(request):
 @xframe_options_exempt
 def map_immo(request):
     return render(request, r"templates\map.html", context={})
+
+
 

@@ -20,6 +20,7 @@ from django.urls import path
 from .views import index
 from .views import map_immo
 
+
 urlpatterns = [
     path('', index),
     path('map_immo/', map_immo),

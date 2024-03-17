@@ -10,7 +10,7 @@ import pandas as pd
 import os
 import tqdm
 import glob
-
+import matplotlib.pyplot as plt
 
 
 """
@@ -140,6 +140,37 @@ def jsongz_to_geojson(departement, ville):
     return gdf_projected
 
 
+#------------FONCTIONS GRAPHIQUES--------------
 
+def GetSquareMetterEvolution(df : pd.DataFrame, on_time : int) :
 
+    list_graph = df[df['type_local'] == "Appartement"]
+    list_graph = list_graph[['valeur_fonciere', 'surface_reelle_bati', 'date_mutation']].dropna()
+    list_graph['prix_m2'] = list_graph['valeur_fonciere']/list_graph['surface_reelle_bati']
+    list_graph['prix_m2'] = list_graph['prix_m2'].rolling(window=int(len(list_graph['prix_m2'])/8)).mean()
+    list_graph = list_graph.sort_values('date_mutation')
+    fig, ax = plt.subplots()  # Création d'une figure et d'un axe pour le plot
+    list_graph.plot(x='date_mutation', y='prix_m2', linewidth=2, ax=ax)
 
+    ax.set_title('Prix au m² des appartements')
+    ax.set_xlabel('Date de mutation')
+    ax.set_ylabel('Prix au m²')
+
+    plt.savefig('../static/Square_metter_appartement.png')
+
+    plt.clf()
+
+    list_graph = df[df['type_local'] == "Maison"]
+    list_graph = list_graph[['valeur_fonciere', 'surface_reelle_bati', 'date_mutation']].dropna()
+    list_graph['prix_m2'] = list_graph['valeur_fonciere'] / list_graph['surface_reelle_bati']
+    list_graph['prix_m2'] = list_graph['prix_m2'].rolling(window=int(len(list_graph['prix_m2'])/8)).mean()
+
+    list_graph = list_graph.sort_values('date_mutation')
+    fig, ax = plt.subplots()  # Création d'une figure et d'un axe pour le plot
+    list_graph.plot(x='date_mutation', y='prix_m2', linewidth=2, ax=ax)
+
+    ax.set_title('Prix au m² des maisons')
+    ax.set_xlabel('Date de mutation')
+    ax.set_ylabel('Prix au m²')
+
+    plt.savefig('../static/Square_metter_maison.png')

@@ -5,37 +5,47 @@
   <title>Immo data</title>
     <style>
         html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
+          height: 100%; /* Prend toute la hauteur de la fenêtre */
+          margin: 0; /* Enlève les marges par défaut */
+          padding: 0; /* Enlève les paddings par défaut */
+          overflow: hidden; /* Empêche le défilement de la page */
         }
-        input, h1 {
+        input, h1, img {
           position: absolute;
-          left: 50%; 
+          left: 50%; /* Positionne à la moitié de la largeur */
           z-index: 50;
-          transform: translateX(-50%); 
+          transform: translateX(-50%); /* Décale de la moitié de sa propre largeur vers la gauche */
         }
         div {
           position: relative ;
         }
         #map {
-          width: 100vw;
-          height: 100vh; 
-          border: none;
+          width: 100vw; /* Utilise 100% de la largeur de la fenêtre */
+          height: 100vh; /* Utilise 100% de la hauteur de la fenêtre */
+          border: none; /* Enlève la bordure de l'iframe */
           position: absolute ;
           z-index: 1;
           top: 0;
           left: 0;
         }
         #entry_city {
-          top: 80px;
-          width: 20%;
+          top: 80px; /* Distance du haut ajustée pour l'input */
+          width: 20%; /* Définir une largeur spécifique pour l'input */
         }
         #titre_index {
-          top: 20px;
+          top: 20px; /* Distance du haut ajustée pour le h1 */
         }
-  </style>
+        #img_m2_maison {
+          top: 20px;
+          left: 85%;
+          width: 25%;
+        }
+        #img_m2_appartement {
+          top: 400px;
+          left: 85%;
+          width: 25%;
+        }
+</style>
 </head>
 
 <body>
@@ -45,6 +55,9 @@
             <input id="entry_city" name="city" placeholder="Enter city...">
         </form>
         <iframe id="map" src="map_immo"></iframe>
+         {% load static %}
+         <img id="img_m2_maison" src="{% static 'Square_metter_maison.png' %}" alt="My image">
+        <img id="img_m2_appartement" src="{% static 'Square_metter_appartement.png' %}" alt="My image">
     </div>
 </body>
 </html>
