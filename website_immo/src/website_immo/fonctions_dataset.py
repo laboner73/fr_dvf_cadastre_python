@@ -144,6 +144,11 @@ def jsongz_to_geojson(departement, ville):
 
 def GetSquareMetterEvolution(df : pd.DataFrame, on_time : int) :
 
+    try :
+        os.makedirs("../static")
+    except FileExistsError :
+        pass
+
     list_graph = df[df['type_local'] == "Appartement"]
     list_graph = list_graph[['valeur_fonciere', 'surface_reelle_bati', 'date_mutation']].dropna()
     list_graph['prix_m2'] = list_graph['valeur_fonciere']/list_graph['surface_reelle_bati']
