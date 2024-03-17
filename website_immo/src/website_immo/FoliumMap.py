@@ -4,7 +4,6 @@ import folium
 from fonctions_dataset import *
 import sys
 
-
 """
 int GetFoliumMap(str)
 
@@ -61,9 +60,13 @@ def GetFoliumMap(city_name : str):
     cluster.add_to(map)
 
     map.save("templates/map.html")
-    return 0
+    return df
+
 
 
 if __name__ == "__main__":
-    a = sys.argv[1]
-    GetFoliumMap(a)
+    city = sys.argv[1]
+    df = GetFoliumMap(city)
+
+    graph_time = sys.argv[2]
+    GetSquareMetterEvolution(df, int(graph_time))
